@@ -1,5 +1,7 @@
+# Slightly improves space efficiency to use one single list as 'scratch space'
 sorted = []
 
+# Recursive method to keep splitting list into halves
 def sorter(list):
     list_len = len(list)
     if list_len <= 1:
@@ -9,11 +11,13 @@ def sorter(list):
     right = sorter(list[list_len // 2:])
     return merger(left, right)
 
+# Helper method to merge two sublists into one sorted list
 def merger(left, right):
     sorted = []
     len_left = len(left)
     len_right = len(right)
-
+    
+    # As per merge sort, we use two pointers
     i = 0; j = 0
     while i < len_left and j < len_right:
         if left[i] < right[j]:
@@ -29,5 +33,6 @@ def merger(left, right):
     
     return sorted
 
+# Test case
 list = [3, 5, 7, 9, 2, 1, 8, 4]
-print(sorter(list)) # Succesfully prints 
+print(sorter(list))     # Prints [1, 2, 3, 4, 5, 6, 8, 9]
